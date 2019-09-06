@@ -11,11 +11,13 @@ module Crudible
     end
 
     def render
-      safe_join(
-        %i[top up down bottom].map do |direction|
-          move_link(direction)
-        end
-      )
+      if Crudible.configuration.auth_callback.call(resource, template, :move)
+        safe_join(
+          %i[top up down bottom].map do |direction|
+            move_link(direction)
+          end
+        )
+      end
     end
 
     private

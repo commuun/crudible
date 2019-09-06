@@ -15,8 +15,13 @@ module Crudible
     def render
       links = []
 
-      links << destroy_link
-      links << edit_link
+      if Crudible.configuration.auth_callback.call(resource, template, :destroy)
+        links << destroy_link
+      end
+
+      if Crudible.configuration.auth_callback.call(resource, template, :edit)
+        links << edit_link
+      end
 
       safe_join(links)
     end
