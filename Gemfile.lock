@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     crudible (0.1.0)
-      rails (~> 5.2.3)
+      rails (>= 4.0.0)
 
 GEM
   remote: https://rubygems.org/

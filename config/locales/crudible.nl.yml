@@ -1,0 +1,20 @@
+nl:
+  crudible:
+    links:
+      new: toevoegen
+      edit: wijzigen
+      destroy: verwijderen
+      up: omhoog
+      down: omlaag
+      top: bovenste
+      bottom: onderste
+
+    flash:
+      created: "%{resource_name} toegevoegd"
+      updated: "%{resource_name} gewijzigd"
+      destroyed: "%{resource_name} verwijderd"
+      moved: "%{resource_name} verplaatst"
+
+    titles:
+      new: "%{resource_name} toevoegen"
+      edit: "%{resource_name} wijzigen"

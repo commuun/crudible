@@ -1,0 +1,20 @@
+nl:
+  crudible:
+    links:
+      new: add
+      edit: edit
+      destroy: delete
+      up: up
+      down: down
+      top: top
+      bottom: bottom
+
+    flash:
+      created: "%{resource_name} added"
+      updated: "%{resource_name} updated"
+      destroyed: "%{resource_name} removed"
+      moved: "%{resource_name} moved"
+
+    titles:
+      new: "Add %{resource_name}"
+      edit: "Edit %{resource_name}"
