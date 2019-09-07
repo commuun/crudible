@@ -15,15 +15,10 @@ module Crudible
     def render
       links = []
 
-      if Crudible.configuration.auth_callback.call(resource, template, :destroy)
-        links << destroy_link
-      end
+      links << destroy_link
+      links << edit_link
 
-      if Crudible.configuration.auth_callback.call(resource, template, :edit)
-        links << edit_link
-      end
-
-      safe_join(links)
+      safe_join(links.compact)
     end
 
     private
@@ -37,6 +32,9 @@ module Crudible
     end
 
     def edit_link
+      return unless Crudible.configuration
+                            .auth_callback.call(resource, template, :edit)
+
       link_to(
         t('crudible.links.edit'),
         [:edit] + resource_path,
@@ -49,6 +47,9 @@ module Crudible
     end
 
     def destroy_link
+      return unless Crudible.configuration
+                            .auth_callback.call(resource, template, :destroy)
+
       link_to(
         t('crudible.links.destroy'),
         resource_path,
