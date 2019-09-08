@@ -8,7 +8,8 @@ module Crudible
       extend ActiveSupport::Concern
 
       included do
-        helper_method :resource, :resources, :resource_base_path, :order_by
+        helper_method :resource, :resources, :resource_name, :resources_name,
+                      :resource_class, :resource_base_path, :order_by
       end
 
       def create
@@ -87,6 +88,21 @@ module Crudible
         @resources ||= resource_scope.order(order_by)
       end
 
+      # Returns the current resource's system name (e.g. news_item)
+      def resource_name
+        @resource_name ||= controller_name.singularize
+      end
+
+      # Returns the current resource's plural system name (e.g. news_items)
+      def resources_name
+        @resources_name ||= controller_name
+      end
+
+      # Return the class for the current resource (e.g. NewsItem)
+      def resource_class
+        resource_name.classify.constantize
+      end
+
       # The redirect path to an individual resource's show view
       def resource_path
         resource_base_path + [resource]
@@ -94,7 +110,7 @@ module Crudible
 
       # The redirect path to the resources index view
       def resources_path
-        resource_base_path + [helpers.resources_name]
+        resource_base_path + [resources_name]
       end
 
       # Finds the current resource for the show, edit and update actions
@@ -123,7 +139,7 @@ module Crudible
       # controller. For example, `News.published`, `current_user.posts` or
       # simply `Blog.all`
       def resource_scope
-        helpers.resource_class.all
+        resource_class.all
       end
 
       # All controllers that allow new/edit actions should implement this class.

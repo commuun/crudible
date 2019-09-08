@@ -27,16 +27,6 @@ module Crudible
       )
     end
 
-    # Returns the current resource's system name (e.g. news_item)
-    def resource_name
-      @resource_name ||= controller_name.singularize
-    end
-
-    # Returns the current resource's plural system name (e.g. news_items)
-    def resources_name
-      @resources_name ||= controller_name
-    end
-
     # Returns the humanized name of the current resource (e.g. News Item)
     def human_resource_name
       @human_resource_name ||= resource_class.model_name.human
@@ -46,11 +36,6 @@ module Crudible
     # (e.g. News Items)
     def human_resources_name
       @human_resources_name ||= resource_class.model_name.human(count: 2)
-    end
-
-    # Return the class for the current resource (e.g. NewsItem)
-    def resource_class
-      resource_name.classify.constantize
     end
 
     # Returns the humanized attribute name for the current resource
