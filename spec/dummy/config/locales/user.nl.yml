@@ -1,0 +1,9 @@
+nl:
+  activerecord:
+    models:
+      user:
+        one: Gebruiker
+        other: Gebruikers
+    attributes:
+      user:
+        first_name: Voornaam

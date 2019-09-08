@@ -4,6 +4,10 @@ AllCops:
     - 'bin/*'
     - 'vendor/bundle/**/*'
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
 Style/NumericLiterals:
   Enabled: false
 

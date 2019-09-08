@@ -19,7 +19,7 @@ module Crudible
     end
 
     # Returns a link to add a new resource
-    def new_resource_link(_resource_class, options = {})
+    def new_resource_link(options = {})
       link_to(
         t('crudible.links.new'),
         [:new, resource_base_path, resource_name].flatten,
