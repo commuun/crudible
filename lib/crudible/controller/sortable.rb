@@ -1,5 +1,8 @@
 module Crudible
   module Controller
+    # If your resource `acts_as_list`, you can include this module in addition
+    # to the Crudible base controller to make a move action available.
+    # Use together with the `move_menu` helper to generate the relevant links.
     module Sortable
       extend ActiveSupport::Concern
 
@@ -17,16 +20,11 @@ module Crudible
       protected
 
       def direction
-        case params[:direction]
-        when 'up'
-          :higher
-        when 'down'
-          :lower
-        when 'top'
-          :to_top
-        when 'bottom'
-          :to_bottom
-        end
+        params[:direction] if available_directions.include?(params[:direction])
+      end
+
+      def available_directions
+        %w[higher lower to_top to_bottom]
       end
 
       # This is the path that is redirected to after a resource is moveed.

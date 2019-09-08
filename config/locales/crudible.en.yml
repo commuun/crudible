@@ -4,10 +4,10 @@ nl:
       new: add
       edit: edit
       destroy: delete
-      up: up
-      down: down
-      top: top
-      bottom: bottom
+      higher: up
+      lower: down
+      to_top: top
+      to_bottom: bottom
 
     flash:
       created: "%{resource_name} added"

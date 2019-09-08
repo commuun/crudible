@@ -15,7 +15,7 @@ module Crudible
                             .auth_callback.call(resource, template, :move)
 
       safe_join(
-        %i[top up down bottom].map do |direction|
+        %i[to_top higher lower to_bottom].map do |direction|
           move_link(direction)
         end
       )
@@ -55,9 +55,9 @@ module Crudible
 
     def enabled?(direction)
       case direction
-      when :up, :top
+      when :higher, :to_top
         !resource.first?
-      when :down, :bottom
+      when :lower, :to_bottom
         !resource.last?
       end
     end

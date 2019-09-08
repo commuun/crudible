@@ -13,12 +13,10 @@ module Crudible
     end
 
     def render
-      links = []
-
-      links << destroy_link
-      links << edit_link
-
-      safe_join(links.compact)
+      safe_join([
+        destroy_link,
+        edit_link
+      ].compact)
     end
 
     private

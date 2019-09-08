@@ -4,10 +4,10 @@ nl:
       new: toevoegen
       edit: wijzigen
       destroy: verwijderen
-      up: omhoog
-      down: omlaag
-      top: bovenste
-      bottom: onderste
+      higher: omhoog
+      lower: omlaag
+      to_top: bovenste
+      to_bottom: onderste
 
     flash:
       created: "%{resource_name} toegevoegd"

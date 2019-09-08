@@ -1,5 +1,9 @@
 module Crudible
   module Controller
+    # Include this module in any resourceful controller to automatically
+    # gain easy access to the current resource, resource scope, etc.
+    # Also included are default actions for create, update and destroy actions.
+    # You are expected to supply the relevant views yourself.
     module Base
       extend ActiveSupport::Concern
 

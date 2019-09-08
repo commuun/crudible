@@ -1,13 +1,21 @@
 # frozen_string_literal: true
 
 require 'crudible/configuration'
-require 'crudible/controller'
-require 'crudible/helpers'
+require 'crudible/controller/base'
+require 'crudible/controller/sortable'
+require 'crudible/helper'
 
 module Crudible
   class << self
     attr_accessor :configuration
 
+    # Modify Crudible's configuration, e.g.
+    #
+    #   Crudible.configure do |config|
+    #     config.new_link_class = 'btn btn-primary btn-sm'
+    #   end
+    #
+    # See the Crucible::Configuration for all settings
     def configure
       self.configuration ||= Crudible::Configuration.new
       yield(configuration)

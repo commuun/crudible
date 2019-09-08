@@ -2,7 +2,7 @@ require 'crudible/resource_menu'
 require 'crudible/move_menu'
 
 module Crudible
-  module Helpers
+  module Helper
     # Creates edit/destroy links for the given resource.
     # Any options are passed on to the `link_to` method.
     def resource_menu(resource, options = {})
@@ -11,8 +11,8 @@ module Crudible
       ).render
     end
 
-    # Creates move up/down/top/bottom links for the given resource to use with
-    # the "acts_as_list" gem.
+    # Creates move higher/lower/top/bottom links for the given resource to use
+    # with the acts_as_list gem.
     # Any options are passed on to the `link_to` method.
     def move_menu(resource, options = {})
       Crudible::MoveMenu.new(resource, options: options, template: self).render
@@ -27,23 +27,23 @@ module Crudible
       )
     end
 
-    # Returns the current resource's system name (e.g. 'news_item')
+    # Returns the current resource's system name (e.g. news_item)
     def resource_name
       @resource_name ||= controller_name.singularize
     end
 
-    # Returns the current resource's plural system name (e.g. 'news_items')
+    # Returns the current resource's plural system name (e.g. news_items)
     def resources_name
       @resources_name ||= controller_name
     end
 
-    # Returns the humanized name of the current resource (e.g. 'News Item')
+    # Returns the humanized name of the current resource (e.g. News Item)
     def human_resource_name
       @human_resource_name ||= resource_class.model_name.human
     end
 
     # Returns the plural humanized name of the current resources
-    # (e.g. 'News Items')
+    # (e.g. News Items)
     def human_resources_name
       @human_resources_name ||= resource_class.model_name.human(count: 2)
     end
