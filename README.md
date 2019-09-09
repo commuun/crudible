@@ -105,7 +105,7 @@ Some examples:
 * `human_resource_name` the localized name of the current resource
 * `human_resource_names` the pluralized version
 
-An example of an index view built (in HAML) using crudible
+An example of an index view built (in HAML) using Crudible
 
     -# app/views/blogs/index.html.haml
     %p= new_resource_link
