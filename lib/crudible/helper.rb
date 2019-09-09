@@ -4,7 +4,14 @@ require 'crudible/move_menu'
 module Crudible
   module Helper
     # Creates edit/destroy links for the given resource.
-    # Any options are passed on to the `link_to` method.
+    #
+    # The options hash currently only has one important key: `path`, which can
+    # be used to add a namespace to the resource's path. For example, if your
+    # route is in the `:admin` namespace, you could do this:
+    #
+    #     resource_menu(user, path: [:admin])
+    #
+    # All other options are passed on to the link_to that generates the buttons
     def resource_menu(resource, options = {})
       Crudible::ResourceMenu.new(
         resource, options: options, template: self
@@ -13,7 +20,14 @@ module Crudible
 
     # Creates move higher/lower/top/bottom links for the given resource to use
     # with the acts_as_list gem.
-    # Any options are passed on to the `link_to` method.
+    #
+    # The options hash currently only has one important key: `path`, which can
+    # be used to add a namespace to the resource's path. For example, if your
+    # route is in the `:admin` namespace, you could do this:
+    #
+    #     resource_menu(user, path: [:admin])
+    #
+    # All other options are passed on to the link_to that generates the buttons
     def move_menu(resource, options = {})
       Crudible::MoveMenu.new(resource, options: options, template: self).render
     end

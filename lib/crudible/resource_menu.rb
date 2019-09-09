@@ -2,7 +2,7 @@ module Crudible
   # This class renders the edit/destroy links for a resource. Used by the
   # Crudible::Helpers module.
   class ResourceMenu
-    attr_reader :resource, :options, :template
+    attr_reader :resource, :options, :path, :template
 
     delegate :t, :link_to, :safe_join, to: :template
 
@@ -10,6 +10,7 @@ module Crudible
       @resource = resource
       @template = template
       @options = options
+      @path = @options.delete(:path)
     end
 
     def render
@@ -68,7 +69,7 @@ module Crudible
     end
 
     def resource_path
-      [options[:path], resource].flatten.compact
+      [path, resource].flatten.compact
     end
   end
 end

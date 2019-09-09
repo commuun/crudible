@@ -1,6 +1,6 @@
 module Crudible
   class MoveMenu
-    attr_reader :resource, :options, :template
+    attr_reader :resource, :options, :path, :template
 
     delegate :t, :link_to, :polymorphic_path, :safe_join, to: :template
 
@@ -8,6 +8,7 @@ module Crudible
       @template = template
       @resource = resource
       @options = options
+      @path = @options.delete(:path)
     end
 
     def render
@@ -59,7 +60,7 @@ module Crudible
     end
 
     def resource_path
-      [options[:path], resource].flatten.compact
+      [path, resource].flatten.compact
     end
   end
 end
