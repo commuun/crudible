@@ -10,9 +10,9 @@ usual boilerplate CRUD actions.
 
 ## Installation
 
-Add to your Gemfile:
+Add to your Gemfile (until the gem is released, please use github):
 
-    gem 'crudible'
+    gem 'crudible', github: 'commuun/crudible'
 
 Then update your bundle
 
