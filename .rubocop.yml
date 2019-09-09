@@ -2,7 +2,9 @@ AllCops:
   TargetRubyVersion: 2.6.3
   Exclude:
     - 'bin/*'
+    - 'gemfiles/**/*'
     - 'vendor/bundle/**/*'
+    - 'gemfiles/vendor/bundle/**/*'
 
 Metrics/BlockLength:
   Exclude:

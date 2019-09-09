@@ -7,7 +7,7 @@ require 'crudible'
 
 module Dummy
   class Application < Rails::Application
-    config.load_defaults 5.2
+    config.load_defaults Rails.version.split('.')[0, 2].join('.')
     config.action_controller.perform_caching = false
     config.action_dispatch.show_exceptions = false
     config.action_mailer.default_url_options = { host: 'dummy.example.com' }
@@ -18,6 +18,7 @@ module Dummy
     config.consider_all_requests_local = true
     config.eager_load = false
     config.encoding = 'utf-8'
+    config.secret_key_base = 'SECRET_KEY_BASE'
 
     config.active_job.queue_adapter = :inline
 

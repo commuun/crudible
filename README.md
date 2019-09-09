@@ -125,7 +125,9 @@ The usual methods apply:
 
 1. Fork the repo.
 
-2. Run the tests to make sure you have a valid clone.
+2. Run the tests to make sure you have a valid clone. (Please use `bundle exec
+   appraisal rspec` so all relevant versions of rails are tested, see
+   https://github.com/thoughtbot/appraisal)
 
 3. Create a branch for your changes
 

@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
 gem 'acts_as_list'
+gem 'appraisal'
 gem 'bundler'
 gem 'pry'
 gem 'pry-rails'

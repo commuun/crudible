@@ -18,5 +18,5 @@ Gem::Specification.new do |spec|
   spec.test_files       = `git ls-files -- {spec}/*`.split("\n")
   spec.version          = Crudible::VERSION
 
-  spec.add_dependency 'rails', '>= 4.0.0'
+  spec.add_dependency 'rails', '>= 5.1.0'
 end
