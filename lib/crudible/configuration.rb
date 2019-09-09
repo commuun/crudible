@@ -41,8 +41,8 @@ module Crudible
       self.edit_link_class = ''
       self.destroy_link_class = ''
       self.move_link_class = ''
-      self.disabled_link_class = 'disabled'
-      self.auth_callback = -> { return true }
+      self.disabled_link_class = ''
+      self.auth_callback = -> { true }
     end
   end
 end
