@@ -7,7 +7,8 @@ Crudible is intended to be a light weight mixin for your CRUD controllers. It
 will add helpers to easily fetch the current resource and provide all the
 usual boilerplate CRUD actions.
 
-## Usage
+
+## Installation
 
 Add to your Gemfile:
 
@@ -21,9 +22,11 @@ Finally, run the install generator like so:
 
     bundle exec rails g crudible:install
 
+
 ## Configuration
 
-Configuration can be changed by modifying `config/initializers/crudible.rb`, for example:
+Configuration can be changed by modifying `config/initializers/crudible.rb`,
+for example:
 
     Crudible.configure do |config|
       # Bootstrap styles for the resource buttons
@@ -39,6 +42,80 @@ Configuration can be changed by modifying `config/initializers/crudible.rb`, for
     end
 
 See the `Crudible::Configuration` class for documentation on all options.
+
+## Usage
+
+Now you can include Crudible's controller mixins, either directly in your
+application controller or any specific controller you want to use:
+
+    class BlogsController < ApplicationController
+      include Crudible::Controller::Base
+    end
+
+This will automatically provide `create`, `update` and `destroy` actions. The
+views you will have to make yourself.
+
+You can further customize the controller by overriding various methods, like
+`resource_scope` or `find_resource`. Examples:
+
+    class BlogsController < ApplicationController
+      include Crudible::Controller::Base
+
+      # Use Pundit to scope the resources
+      def resource_scope
+        policy_scope(super)
+      end
+
+      # Use friendly-id slugs to find resources
+      def find_resource
+        resource_scope.friendly.find(params[:id])
+      end
+    end
+
+Please see the Crudible::Controller::Base class for full documentation on
+overridable methods.
+
+### Strong params
+
+In order to make `create` and `update` actions work you will have to tell
+Crudible the params to accept by overriding the `resource_attributes` method:
+
+    class UsersController < ApplicationController
+      def resource_attributes
+        return unless params[:user].present?
+
+        params.require(:user).permit(:email, :last_name)
+      end
+    end
+
+
+### View helpers
+
+In your views you can use several helpers to easily access your controller's
+resources. For full documentation, check the Crudible::Helper class, but here
+are the most commonly used ones:
+
+* `resources` available in all actions and gives you the full collection of
+  resources, primarily for use in the `index` view.
+* `resource` the current resource as used in the `show` and `edit` views.
+* `human_resource_name` the localized name of the current resource
+* `human_resource_names` the pluralized version
+
+An example of an index view built (in HAML) using crudible
+
+    %p= new_resource_link
+
+    %table
+      %thead
+        %tr
+          %th= attribute_name(:title)
+          %th
+      %tbody
+        - resources.each do |resource|
+          %tr
+            %td= link_to resource.title, resource_path
+            %td= resource_menu(resource)
+
 
 ## Contributing
 
