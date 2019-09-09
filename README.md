@@ -28,6 +28,7 @@ Finally, run the install generator like so:
 Configuration can be changed by modifying `config/initializers/crudible.rb`,
 for example:
 
+    # config/initializers/crudible.rb
     Crudible.configure do |config|
       # Bootstrap styles for the resource buttons
       config.new_link_class = 'btn btn-primary'
@@ -48,7 +49,8 @@ See the `Crudible::Configuration` class for documentation on all options.
 Now you can include Crudible's controller mixins, either directly in your
 application controller or any specific controller you want to use:
 
-    class BlogsController < ApplicationController
+    # app/controllers/blogs_controller.rb
+    class ApplicationController < ActionController::Base
       include Crudible::Controller::Base
     end
 
@@ -58,6 +60,7 @@ views you will have to make yourself.
 You can further customize the controller by overriding various methods, like
 `resource_scope` or `find_resource`. Examples:
 
+    # app/controllers/blogs_controller.rb
     class BlogsController < ApplicationController
       include Crudible::Controller::Base
 
@@ -72,14 +75,15 @@ You can further customize the controller by overriding various methods, like
       end
     end
 
-Please see the Crudible::Controller::Base class for full documentation on
+Please see the `Crudible::Controller::Base` class for full documentation on
 overridable methods.
 
 ### Strong params
 
-In order to make `create` and `update` actions work you will have to tell
-Crudible the params to accept by overriding the `resource_attributes` method:
+In order to make `create` and `update` actions work you will have to override
+the `resource_attributes` method:
 
+    # app/controllers/users_controller.rb
     class UsersController < ApplicationController
       def resource_attributes
         return unless params[:user].present?
@@ -92,17 +96,18 @@ Crudible the params to accept by overriding the `resource_attributes` method:
 ### View helpers
 
 In your views you can use several helpers to easily access your controller's
-resources. For full documentation, check the Crudible::Helper class, but here
-are the most commonly used ones:
+resources. For full documentation, check the Crudible::Helper class.
 
-* `resources` available in all actions and gives you the full collection of
-  resources, primarily for use in the `index` view.
+Some examples:
+
+* `resources` gives you the full collection, mainly for the `index` view.
 * `resource` the current resource as used in the `show` and `edit` views.
 * `human_resource_name` the localized name of the current resource
 * `human_resource_names` the pluralized version
 
 An example of an index view built (in HAML) using crudible
 
+    -# app/views/blogs/index.html.haml
     %p= new_resource_link
 
     %table
