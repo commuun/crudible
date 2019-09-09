@@ -23,14 +23,6 @@ module Crudible
 
     private
 
-    def described_class
-      resource.class
-    end
-
-    def described_class_name
-      described_class.model_name.human
-    end
-
     def direction_label(direction)
       t("crudible.links.#{direction}")
     end

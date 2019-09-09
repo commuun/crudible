@@ -31,9 +31,11 @@ module Crudible
     # This method is called when a link is generated. The method and resource
     # are supplied as arguments. For example, if using Pundit you could do this:
     #
-    #   config.auth_callback = ->(resource, action) {
+    #   config.auth_callback = ->(resource, template, action) {
     #     policy(resource, "#{action}?")
     #   }
+    #
+    # The template can be used to get access to helpers such as Pundit's policy
     attr_accessor :auth_callback
 
     def initialize
@@ -42,7 +44,7 @@ module Crudible
       self.destroy_link_class = ''
       self.move_link_class = ''
       self.disabled_link_class = ''
-      self.auth_callback = -> { true }
+      self.auth_callback = ->(_resource, _template, _action) { true }
     end
   end
 end

@@ -1,18 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Crudible::Helper, type: :helper do
-  around do |example|
-    I18n.with_locale(:nl) do
-      without_partial_double_verification { example.run }
-    end
-  end
-
-  before do
-    Crudible.configure {}
-    allow(helper).to receive(:resource_base_path).and_return([])
-    allow(helper).to receive(:resource_name).and_return('user')
-    allow(helper).to receive(:resource_class).and_return(User)
-  end
+  include_context 'view helpers'
 
   describe '#human_resource_name' do
     it 'returns the humanized resource name' do
@@ -37,6 +26,28 @@ RSpec.describe Crudible::Helper, type: :helper do
       expect(helper.new_resource_link).to eq(
         '<a class="" href="/users/new">toevoegen</a>'
       )
+    end
+  end
+
+  describe '#resource_menu' do
+    it 'renders the resource context menu' do
+      resource_menu = double(Crudible::ResourceMenu)
+
+      allow(Crudible::ResourceMenu).to receive(:new).and_return(resource_menu)
+      expect(resource_menu).to receive(:render).and_return('rendered')
+
+      expect(helper.resource_menu(:user, template: self)).to eq('rendered')
+    end
+  end
+
+  describe '#move_menu' do
+    it 'renders the resource context menu' do
+      move_menu = double(Crudible::MoveMenu)
+
+      allow(Crudible::MoveMenu).to receive(:new).and_return(move_menu)
+      expect(move_menu).to receive(:render).and_return('rendered')
+
+      expect(helper.move_menu(:user, template: self)).to eq('rendered')
     end
   end
 end

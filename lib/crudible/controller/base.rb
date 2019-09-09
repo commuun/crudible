@@ -90,7 +90,7 @@ module Crudible
 
       # Returns the current resource's system name (e.g. news_item)
       def resource_name
-        @resource_name ||= controller_name.singularize
+        @resource_name ||= resources_name.singularize
       end
 
       # Returns the current resource's plural system name (e.g. news_items)

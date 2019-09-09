@@ -1,10 +1,15 @@
 ENV['RAILS_ENV'] ||= 'test'
 
+require 'simplecov'
+SimpleCov.start
+
 require 'pry'
 require 'dummy/config/environment'
 require 'rspec/rails'
 
 require 'crudible'
+
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -25,9 +30,19 @@ RSpec.configure do |config|
   config.order = :random
   Kernel.srand config.seed
 
-  config.before { reset_config }
-end
+  config.before do
+    Crudible.configuration = nil
+    Temping.create :user do
+      with_columns do |t|
+        t.string :email
+        t.integer :position
+      end
 
-def reset_config
-  Crudible.configuration = nil
+      acts_as_list
+    end
+  end
+
+  config.after do
+    Temping.teardown
+  end
 end

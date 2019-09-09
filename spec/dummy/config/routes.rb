@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :users do
+    member do
+      put :move
+    end
+  end
 end

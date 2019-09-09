@@ -18,3 +18,6 @@ nl:
     titles:
       new: "%{resource_name} toevoegen"
       edit: "%{resource_name} wijzigen"
+
+    confirm:
+      delete: Weet u zeker dat u deze %{resource_name} wilt verwijderen?

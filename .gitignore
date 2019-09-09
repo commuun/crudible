@@ -3,6 +3,7 @@ log/*.log
 pkg/
 rdoc/*
 db/*.sqlite3
+coverage/*
 tmp/*
 spec/dummy/db/*.sqlite3
 spec/dummy/db/*.sqlite3-journal
