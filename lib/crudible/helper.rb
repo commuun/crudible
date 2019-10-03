@@ -11,6 +11,9 @@ module Crudible
     #
     #     resource_menu(user, path: [:admin])
     #
+    # Note that if no path is supplied, the resource_base_path as defined in
+    # the controller is used.
+    #
     # All other options are passed on to the link_to that generates the buttons
     def resource_menu(resource, options = {})
       Crudible::ResourceMenu.new(
@@ -25,6 +28,9 @@ module Crudible
     # be used to add a namespace to the resource's path. For example, if your
     # route is in the `:admin` namespace, you could do this:
     #
+    # Note that if no path is supplied, the resource_base_path as defined in
+    # the controller is used.
+    #
     #     resource_menu(user, path: [:admin])
     #
     # All other options are passed on to the link_to that generates the buttons
@@ -32,11 +38,20 @@ module Crudible
       Crudible::MoveMenu.new(resource, options: options, template: self).render
     end
 
-    # Returns a link to add a new resource
-    def new_resource_link(options = {})
+    # Returns a link to add a new resource. If no target is given, uses
+    # the current controller's resource_name as a target. e.g.
+    #
+    #     new_resource_link :blog
+    #
+    #  is equivalent to
+    #
+    #     new_resource_link
+    #
+    #  assuming the current controller is the BlogsController
+    def new_resource_link(target = nil, options = {})
       link_to(
         t('crudible.links.new'),
-        [:new, resource_base_path, resource_name].flatten,
+        [:new, resource_base_path, target || resource_name].flatten,
         options.deep_merge(class: Crudible.configuration.new_link_class)
       )
     end

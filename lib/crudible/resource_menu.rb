@@ -4,7 +4,7 @@ module Crudible
   class ResourceMenu
     attr_reader :resource, :options, :path, :template
 
-    delegate :t, :link_to, :safe_join, to: :template
+    delegate :t, :link_to, :safe_join, :resource_base_path, to: :template
 
     def initialize(resource, template:, options: {})
       @resource = resource
@@ -69,7 +69,7 @@ module Crudible
     end
 
     def resource_path
-      [path, resource].flatten.compact
+      [path || resource_base_path, resource].flatten.compact
     end
   end
 end
