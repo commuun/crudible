@@ -3,7 +3,7 @@
 require 'crudible/configuration'
 require 'crudible/controller/base'
 require 'crudible/controller/sortable'
-require 'crudible/helper'
+require 'crudible/helpers/resource_helper'
 
 module Crudible
   class << self
