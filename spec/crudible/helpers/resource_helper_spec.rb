@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Crudible::Helper, type: :helper do
+RSpec.describe Crudible::Helpers::ResourceHelper, type: :helper do
   include_context 'view helpers'
 
   describe '#human_resource_name' do
@@ -24,16 +24,18 @@ RSpec.describe Crudible::Helper, type: :helper do
   describe '#new_resource_link' do
     it 'returns a link to a new resource' do
       expect(helper.new_resource_link).to eq(
-        '<a class="" href="/users/new">toevoegen</a>'
+        '<a class="new" href="/users/new">toevoegen</a>'
       )
     end
   end
 
   describe '#resource_menu' do
     it 'renders the resource context menu' do
-      resource_menu = double(Crudible::ResourceMenu)
+      resource_menu = double(Crudible::Helpers::ResourceMenu)
 
-      allow(Crudible::ResourceMenu).to receive(:new).and_return(resource_menu)
+      allow(Crudible::Helpers::ResourceMenu)
+        .to receive(:new).and_return(resource_menu)
+
       expect(resource_menu).to receive(:render).and_return('rendered')
 
       expect(helper.resource_menu(:user, template: self)).to eq('rendered')
@@ -42,9 +44,11 @@ RSpec.describe Crudible::Helper, type: :helper do
 
   describe '#move_menu' do
     it 'renders the resource context menu' do
-      move_menu = double(Crudible::MoveMenu)
+      move_menu = double(Crudible::Helpers::MoveMenu)
 
-      allow(Crudible::MoveMenu).to receive(:new).and_return(move_menu)
+      allow(Crudible::Helpers::MoveMenu)
+        .to receive(:new).and_return(move_menu)
+
       expect(move_menu).to receive(:render).and_return('rendered')
 
       expect(helper.move_menu(:user, template: self)).to eq('rendered')
