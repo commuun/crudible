@@ -29,7 +29,7 @@ module Crudible
 
         link_to(
           edit_resource_label,
-          [:edit, resource_base_path, resource].flatten,
+          [:edit, path || resource_base_path, resource].flatten,
           class: edit_resource_class
         )
       end
@@ -40,7 +40,7 @@ module Crudible
 
         link_to(
           t('crudible.links.destroy'),
-          [resource_base_path, resource].flatten,
+          [path || resource_base_path, resource].flatten,
           destroy_resource_link_options(resource)
         )
       end

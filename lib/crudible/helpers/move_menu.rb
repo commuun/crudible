@@ -37,7 +37,7 @@ module Crudible
 
       def move_resource_path(direction)
         polymorphic_path(
-          [:move, resource_base_path, resource].flatten,
+          [:move, path || resource_base_path, resource].flatten,
           direction: direction
         )
       end
