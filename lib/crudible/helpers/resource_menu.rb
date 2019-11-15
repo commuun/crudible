@@ -27,18 +27,14 @@ module Crudible
       return unless Crudible.configuration
                             .auth_callback.call(resource, template, :edit)
 
-      edit_resource_link([:edit] + resource_path)
+      edit_resource_link(resource)
     end
 
     def destroy_link
       return unless Crudible.configuration
                             .auth_callback.call(resource, template, :destroy)
 
-      destroy_resource_link(resource_path)
-    end
-
-    def resource_path
-      [path || resource_base_path, resource].flatten.compact
+      destroy_resource_link(resource)
     end
   end
 end

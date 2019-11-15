@@ -37,8 +37,8 @@ module Crudible
           .render
       end
 
-      # Returns a link to add a new resource. If no target is given, uses
-      # the current controller's resource_name as a target. e.g.
+      # Returns a link to add a new resource. If no resource is given, uses
+      # the current controller's resource_name as a resource. e.g.
       #
       #     new_resource_link :blog
       #
@@ -47,10 +47,10 @@ module Crudible
       #     new_resource_link
       #
       #  assuming the current controller is the BlogsController
-      def new_resource_link(target = nil, options = {})
+      def new_resource_link(resource = nil, options = {})
         link_to(
           t('crudible.links.new'),
-          [:new, resource_base_path, target || resource_name].flatten,
+          [:new, resource_base_path, resource || resource_name].flatten,
           options.deep_merge(class: Crudible.configuration.new_link_class)
         )
       end
@@ -58,18 +58,22 @@ module Crudible
       # This is the method used by the resource_menu helper to render the actual
       # links. These can be overridden to include your own styles, icons or
       # translations.
-      def edit_resource_link(resource_path)
-        link_to(t('crudible.links.edit'), resource_path,
-                class: Crudible.configuration.edit_link_class)
+      def edit_resource_link(resource, options = {})
+        link_to(
+          t('crudible.links.edit'),
+          [:edit, resource_base_path, resource].flatten,
+          options.deep_merge(class: Crudible.configuration.edit_link_class)
+        )
       end
 
       # This is the method used by the resource_menu helper to render the actual
       # links. These can be overridden to include your own styles, icons or
       # translations.
-      def destroy_resource_link(resource_path)
+      def destroy_resource_link(resource, options = {})
         link_to(
           t('crudible.links.destroy'),
-          resource_path, destroy_resource_link_options(resource_path.last)
+          [resource_base_path, resource].flatten,
+          options.deep_merge(destroy_resource_link_options(resource_path.last))
         )
       end
 
@@ -84,6 +88,39 @@ module Crudible
             )
           }
         }
+      end
+
+      # This is the method used by the move_menu helper to render the actual
+      # links. These can be overridden to include your own styles, icons or
+      # translations.
+      def move_resource_link(resource, direction, options = {})
+        link_to(
+          t("crudible.links.#{direction}"),
+          move_resource_path(resource, direction),
+          options.deep_merge(move_resource_options(resource, direction))
+        )
+      end
+
+      def move_resource_path(resource, direction)
+        polymorphic_path(
+          [:move, resource_base_path, resource].flatten,
+          direction: direction
+        )
+      end
+
+      def move_resource_options(resource, direction)
+        css_class = Crudible.configuration.move_link_class
+        css_class += ' disabled' unless move_link_enabled?(resource, direction)
+        { method: 'PUT', class:  css_class }
+      end
+
+      def move_link_enabled?(resource, direction)
+        case direction
+        when :higher, :to_top
+          !resource.first?
+        when :lower, :to_bottom
+          !resource.last?
+        end
       end
 
       # Returns the humanized name of the current resource (e.g. News Item)
