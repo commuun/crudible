@@ -1,4 +1,4 @@
-nl:
+en:
   crudible:
     links:
       new: add
@@ -18,3 +18,6 @@ nl:
     titles:
       new: "Add %{resource_name}"
       edit: "Edit %{resource_name}"
+
+    confirm:
+      delete: Are you sure you want to remove this %{resource_name}?
