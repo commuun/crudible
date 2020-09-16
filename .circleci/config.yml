@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:2.6.0-node
+      - image: circleci/ruby:2.6.0-stretch
     executor: ruby/default
     steps:
       - checkout
@@ -13,7 +13,7 @@ jobs:
 
   checking:
     docker:
-      - image: circleci/ruby:2.6.3-stretch
+      - image: circleci/ruby:2.6.0-stretch
     steps:
       - checkout
       - ruby/install-deps
@@ -23,7 +23,7 @@ jobs:
 
   test:
     docker:
-      - image: cimg/ruby:2.6.0-node
+      - image: circleci/ruby:2.6.0-stretch
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
