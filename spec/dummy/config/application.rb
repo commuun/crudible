@@ -1,8 +1,10 @@
 require_relative 'boot'
 
-require 'rails/all'
+require "active_record/railtie"
+require "action_controller/railtie"
 
 Bundler.require(*Rails.groups)
+
 require 'crudible'
 
 module Dummy
@@ -10,8 +12,6 @@ module Dummy
     config.load_defaults Rails.version.split('.')[0, 2].join('.')
     config.action_controller.perform_caching = false
     config.action_dispatch.show_exceptions = false
-    config.action_mailer.default_url_options = { host: 'dummy.example.com' }
-    config.action_mailer.delivery_method = :test
     config.active_support.deprecation = :stderr
     config.active_support.test_order = :random
     config.cache_classes = true
@@ -19,8 +19,6 @@ module Dummy
     config.eager_load = false
     config.encoding = 'utf-8'
     config.secret_key_base = 'SECRET_KEY_BASE'
-
-    config.active_job.queue_adapter = :inline
 
     root_path = File.dirname(__FILE__) + '/..'
 
