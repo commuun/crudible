@@ -1,5 +1,7 @@
 # Crudible
 
+[![commuun](https://circleci.com/gh/commuun/crudible.svg?style=svg)](https://github.com/commuun/crudible)
+
 Clean & simple CRUD helpers for those who don't need a full-blown admin
 interface.
 
