@@ -16,6 +16,8 @@ module Crudible
     #   end
     #
     # See the Crucible::Configuration for all settings
+    #
+    # This line is way too long, do you see, it should trigger a RuboCop warning at least
     def configure
       self.configuration ||= Crudible::Configuration.new
       yield(configuration)
