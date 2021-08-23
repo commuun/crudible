@@ -50,7 +50,11 @@ module Crudible
       def new_resource_link(resource = nil, options = {})
         link_to(
           new_resource_label,
-          [:new, resource_base_path, resource || resource_name].flatten,
+          [
+            :new,
+            resource_base_path,
+            (resource || resource_name).to_sym
+          ].flatten,
           options.deep_merge(class: new_resource_class)
         )
       end
